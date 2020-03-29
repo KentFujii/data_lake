@@ -1,0 +1,43 @@
+version: "3"
+services:
+  initdb:
+    build: .
+    volumes:
+      - .:/data_lake
+    command: airflow initdb
+    depends_on:
+      - postgres
+      - redis
+  webserver:
+    build: .
+    volumes:
+      - .:/data_lake
+    command: airflow webserver
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+      - redis
+      - initdb
+  scheduler:
+    build: .
+    volumes:
+      - .:/data_lake
+    command: airflow scheduler
+    depends_on:
+      - postgres
+      - redis
+      - initdb
+  # worker:
+  postgres:
+    image: postgres:11.1
+    environment:
+      POSTGRES_USER: data_lake
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: data_lake
+    ports:
+      - "5432:5432"
+  redis:
+    image: redis:5.0
+    ports:
+      - "6379:6379"
