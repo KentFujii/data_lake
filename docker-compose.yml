@@ -19,6 +19,7 @@ services:
       - postgres
       - redis
       - initdb
+    restart: on-failure
   scheduler:
     build: .
     volumes:
@@ -28,7 +29,17 @@ services:
       - postgres
       - redis
       - initdb
-  # worker:
+    restart: on-failure
+  worker:
+    build: .
+    volumes:
+      - .:/data_lake
+    command: airflow worker
+    depends_on:
+      - postgres
+      - redis
+      - initdb
+    restart: on-failure
   postgres:
     image: postgres:11.1
     environment:
