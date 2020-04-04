@@ -11,8 +11,8 @@ from airflow.operators.python_operator import PythonOperator
 dag = DAG(
     dag_id="chapter2_download_rocket_launches",
     description="Download rocket pictures of recently launched rockets.",
-    start_date=datetime.today(),
-    schedule_interval="* * * * *",
+    start_date=datetime(2015, 6, 1),
+    schedule_interval=timedelta(1)
 )
 
 download_launches = BashOperator(
