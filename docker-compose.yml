@@ -40,18 +40,6 @@ services:
       - redis
       - initdb
     restart: on-failure
-  flower:
-    build: .
-    volumes:
-      - .:/data_lake
-    command: airflow flower
-    ports:
-        - "5555:5555"
-    depends_on:
-      - postgres
-      - redis
-      - initdb
-    restart: on-failure
   postgres:
     image: postgres:11.1
     environment:
