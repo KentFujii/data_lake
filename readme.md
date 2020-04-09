@@ -25,3 +25,4 @@ https://dev.classmethod.jp/articles/airflow-gs-arch-learn/
 
 https://airflow.apache.org/docs/stable/configurations-ref.html?highlight=celery
 
+https://stackoverflow.com/questions/44780736/setting-up-s3-for-logs-in-airflow/44796247#44796247

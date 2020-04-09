@@ -52,3 +52,12 @@ services:
     image: redis:5.0
     ports:
       - "6379:6379"
+  minio:
+    image: minio/minio
+    environment:
+      MINIO_ACCESS_KEY: data_lake
+      MINIO_SECRET_KEY: password
+    ports:
+      - "9000:9000"
+    entrypoint: sh
+    command: -c "mkdir -p /data/data_lake & /usr/bin/minio server /data"
