@@ -2,6 +2,8 @@ version: "3"
 services:
   initdb:
     build: .
+    env_file:
+      - development.env
     volumes:
       - .:/data_lake
     command: airflow initdb
@@ -10,6 +12,8 @@ services:
       - redis
   webserver:
     build: .
+    env_file:
+      - development.env
     volumes:
       - .:/data_lake
     command: airflow webserver
@@ -22,6 +26,8 @@ services:
     restart: on-failure
   scheduler:
     build: .
+    env_file:
+      - development.env
     volumes:
       - .:/data_lake
     command: airflow scheduler
@@ -32,6 +38,8 @@ services:
     restart: on-failure
   worker:
     build: .
+    env_file:
+      - development.env
     volumes:
       - .:/data_lake
     command: airflow worker
