@@ -13,6 +13,21 @@ fig exec redis redis-cli
 
 https://aws.amazon.com/jp/big-data/datalakes-and-analytics/what-is-a-data-lake/
 
+https://github.com/apache/airflow/blob/master/airflow/contrib/hooks/gcs_hook.py
+
+AIRFLOW_CONN_AWS_DEFAULT=aws://?aws_access_key_id=data_lake&aws_secret_access_key=password&host=http%3A%2F%2Fminio%3A9000
+
 ### airflow
 
 https://airflow.apache.org/docs/stable/howto/write-logs.html#writing-logs-to-google-cloud-storage
+
+https://github.com/googleapis/python-storage/issues/102
+
+https://github.com/apache/airflow/blob/79d3f33c1b65c9c7e7b1a75e25d38cab9aa4517f/airflow/providers/google/cloud/hooks/gcs.py
+
+https://googleapis.dev/python/storage/latest/index.html
+
+```
+{crypto.py:85} WARNING - empty cryptography key - values will not be stored encrypted.
+{gcs_task_handler.py:165} ERROR - Could not write logs to gs://data_lake/chapter2_download_rocket_launches/get_pictures/2015-06-06T00:00:00+00:00/1.log: [Errno 2] No such file or directory: '/keys/key.json'
+```
