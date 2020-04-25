@@ -1,2 +1,2 @@
-apache-airflow[aws,gcp,postgres,redis,celery]==1.10.9
+apache-airflow[gcp,postgres,redis,celery]==1.10.9
 SQLAlchemy==1.3.15
