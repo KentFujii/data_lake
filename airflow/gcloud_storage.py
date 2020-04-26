@@ -31,8 +31,10 @@ client = storage.Client(
     client_options=ClientOptions(api_endpoint=EXTERNAL_URL),
 )
 
+bucket = client.create_bucket('sample-bucket')
 bucket = client.get_bucket('sample-bucket')
-blob = bucket.blob("some_file.txt")
+blob = bucket.blob("readme.md")
+blob.upload_from_filename("readme.md")
 
 content = blob.download_as_string()
 print (content)
