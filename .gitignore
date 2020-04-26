@@ -1,3 +1,4 @@
 logs
 unittests.cfg
 airflow-webserver.pid
+account.json

@@ -1,9 +1,10 @@
 ## cli
 
+export GOOGLE_APPLICATION_CREDENTIALS="/path/to/keyfile.json"
+
 ### postgres
 
 fig exec postgres bash -c "psql -U airflow -l"
-
 
 ### redis
 
