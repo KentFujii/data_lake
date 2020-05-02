@@ -33,7 +33,6 @@ class GcloudStorage:
             _http=my_http,
             client_options=ClientOptions(api_endpoint=GCS_EXTERNAL_URL),
         )
-        bucket = self.client.create_bucket(GCS_DEFAULT_BUCKET) # create the bucket if not exists
         self.bucket = self.client.get_bucket(GCS_DEFAULT_BUCKET)
 
     def list(self, prefix):

@@ -1,24 +1,31 @@
 import pytest
 from storages.gcloud_storage import GcloudStorage
 
-# @pytest.mark.usefixtures('tasks_db')
 class TestGcloudStorage(object):
+    ## TODO: setup fixture with json api
+    # https://github.com/fsouza/fake-gcs-server
+    # https://cloud.google.com/storage/docs/json_api/v1?hl=ja
     @classmethod
     def setup_class(cls):
+        # create bucket
+        cls.storage = GcloudStorage()
         print('setup_class')
 
     @classmethod
     def teardown_class(cls):
+        # delete bucket
         print('teardown_class')
 
     def setup_method(self):
+        # create object
+        print(self.storage)
         print('setup_method')
 
     def teardown_method(self):
+        # create object
         print('teardown_method')
-        pass
 
-    def test_attach(self):
+    def test_crud(self):
         storage = GcloudStorage()
         content = storage.put('readme.md')
         assert content == None
