@@ -3,11 +3,13 @@ from storages.gcloud_storage import GcloudStorage
 
 # @pytest.mark.usefixtures('tasks_db')
 class TestGcloudStorage():
-    def test_store(self):
-        GcloudStorage()
-        # """Should raise an exception if summary missing."""
-        # with pytest.raises(ValueError):
-        #     tasks.add(Task(owner='bob'))
+    def test_attach(self):
+        storage = GcloudStorage()
+        content = storage.put('readme.md')
+        assert content == None
+
+    def test_purge(self):
+        pass
 
 # @pytest.mark.parametrize('site, current_url, expected_following_url, expected_indexing_url', [
 #     (
