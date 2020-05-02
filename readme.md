@@ -2,6 +2,8 @@
 
 export GOOGLE_APPLICATION_CREDENTIALS="/path/to/keyfile.json"
 
+pytest -s -v
+
 ### postgres
 
 fig exec postgres bash -c "psql -U airflow -l"

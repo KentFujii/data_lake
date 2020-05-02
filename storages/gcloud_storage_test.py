@@ -2,7 +2,22 @@ import pytest
 from storages.gcloud_storage import GcloudStorage
 
 # @pytest.mark.usefixtures('tasks_db')
-class TestGcloudStorage():
+class TestGcloudStorage(object):
+    @classmethod
+    def setup_class(cls):
+        print('setup_class')
+
+    @classmethod
+    def teardown_class(cls):
+        print('teardown_class')
+
+    def setup_method(self):
+        print('setup_method')
+
+    def teardown_method(self):
+        print('teardown_method')
+        pass
+
     def test_attach(self):
         storage = GcloudStorage()
         content = storage.put('readme.md')
