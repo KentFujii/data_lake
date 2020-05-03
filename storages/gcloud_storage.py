@@ -7,10 +7,9 @@ from google.cloud import storage
 
 class GcloudStorage:
     def __init__(self):
-        # super().__init__()
         GCS_EXTERNAL_URL = os.getenv("GCS_EXTERNAL_URL", "https://fake-gcs-server:4443")
         GCS_PUBLIC_HOST = os.getenv("GCS_PUBLIC_HOST", "storage.gcs.fake-gcs-server.nip.io:4443")
-        GCS_DEFAULT_BUCKET = os.getenv("GCS_DEFAULT_BUCKET", "data_lake")
+        GCS_DEFAULT_BUCKET = os.getenv("GCS_DEFAULT_BUCKET", "data_lake_test")
         storage.blob._API_ACCESS_ENDPOINT = "https://" + GCS_PUBLIC_HOST
         storage.blob._DOWNLOAD_URL_TEMPLATE = (
             u"%s/download/storage/v1{path}?alt=media" % GCS_EXTERNAL_URL
@@ -36,15 +35,16 @@ class GcloudStorage:
         self.bucket = self.client.get_bucket(GCS_DEFAULT_BUCKET)
 
     def list(self, prefix):
-        pass
+        blobs = list(self.bucket.list_blobs(prefix=prefix))
+        return [blob.name for blob in blobs]
 
-    def put(self, object_name):
-        blob = self.bucket.blob(object_name)
-        blob.upload_from_filename(object_name)
+    # def put(self, object_name):
+    #     blob = self.bucket.blob(object_name)
+    #     blob.upload_from_filename(object_name)
 
-    def get(self):
-        blob = self.bucket.blob(object_name)
-        return blob.download_as_string()
+    # def get(self):
+    #     blob = self.bucket.blob(object_name)
+    #     return blob.download_as_string()
 
-    def delete(self):
-        pass
+    # def delete(self):
+    #     pass

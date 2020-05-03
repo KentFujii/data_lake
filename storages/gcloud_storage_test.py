@@ -1,50 +1,47 @@
 import pytest
 import requests
+import urllib3
 from storages.gcloud_storage import GcloudStorage
 
 class TestGcloudStorage(object):
-    ## TODO: setup fixture with json api
-    # https://github.com/fsouza/fake-gcs-server
-    # https://cloud.google.com/storage/docs/json_api/v1?hl=ja
     @classmethod
     def setup_class(cls):
-        # initialize storage class
-        print('setup_class')
-
-    @classmethod
-    def teardown_class(cls):
-        # delete bucket
-        # curl --insecure https://fake-gcs-server:4443/storage/v1/b
-        # curl --insecure -X DELETE https://fake-gcs-server:4443/storage/v1/b/data_lake
-        print('teardown_class')
+        cls.storage = GcloudStorage()
 
     def setup_method(self):
-        # create object
-        import pdb; pdb.set_trace()
-        headers = {
-            'Accept': 'application/json',
-        }
-        data = '{"auth":{"passwordCredentials":{"username":"useruser","password":"passpasspass"},"tenantId":"123456789123456789"}}'
-        response = requests.post('https://identity.tyo2.conoha.io/v2.0/tokens', headers=headers, data=data)
-        print(response.text)
-        print('setup_method')
+        # curl --insecure -X POST -H "Content-Type: text/plain" "https://fake-gcs-server:4443/upload/storage/v1/b/data_lake_test/o?uploadType=media&name=test.txt"
+        my_http = requests.Session()
+        my_http.verify = False
+        urllib3.disable_warnings(
+            urllib3.exceptions.InsecureRequestWarning
+        )
+        headers = {'Content-Type': 'text/plain'}
+        data = "a text content is here"
+        my_http.post('https://fake-gcs-server:4443/upload/storage/v1/b/data_lake_test/o?uploadType=media&name=test.txt', headers=headers, data=data)
+
 
     def teardown_method(self):
         # delete object
-        # curl --insecure https://fake-gcs-server:4443/storage/v1/b/data_lake/o
-        # curl --insecure -X DELETE https://fake-gcs-server:4443/storage/v1/b/data_lake/o/readme.md
-        print('teardown_method')
+        # curl --insecure https://fake-gcs-server:4443/storage/v1/b/data_lake_test/o
+        # curl --insecure -X DELETE https://fake-gcs-server:4443/storage/v1/b/data_lake_test/o/readme.md
+        # my_http = requests.Session()
+        # my_http.verify = False
+        # urllib3.disable_warnings(
+        #     urllib3.exceptions.InsecureRequestWarning
+        # )
+        # headers = {'Content-Type': 'text/plain'}
+        # my_http.post('https://fake-gcs-server:4443/upload/storage/v1/b/data_lake_test/o?uploadType=media&name=test.txt', headers=headers)
 
     def test_list(self):
-        storage = GcloudStorage()
-        content = storage.put('readme.md')
-        assert content == None
+        assert len(self.storage.list("")) == 1
 
-    def test_put(self):
-        pass
+    # def test_put(self):
+    #     storage = GcloudStorage()
+    #     content = storage.put('readme.md')
+    #     assert content == None
 
-    def test_get(self):
-        pass
+    # def test_get(self):
+    #     pass
 
-    def test_delete(self):
-        pass
+    # def test_delete(self):
+    #     pass
