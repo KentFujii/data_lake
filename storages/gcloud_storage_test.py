@@ -17,7 +17,7 @@ class TestGcloudStorage(object):
         )
         headers = {'Content-Type': 'text/plain'}
         data = "a text content is here"
-        my_http.post('https://fake-gcs-server:4443/upload/storage/v1/b/data_lake_test/o?uploadType=media&name=test.txt', headers=headers, data=data)
+        my_http.post('https://fake-gcs-server:4443/upload/storage/v1/b/data_lake_test/o?uploadType=media&name=sample.txt', headers=headers, data=data)
 
 
     def teardown_method(self):
@@ -33,12 +33,12 @@ class TestGcloudStorage(object):
             my_http.delete('https://fake-gcs-server:4443/storage/v1/b/data_lake_test/o/{item_name}'.format(item_name=item_name))
 
     def test_list(self):
-        assert len(self.storage.list("")) == 1
+        object_count = len(self.storage.list(""))
+        assert object_count == 1
 
-    # def test_put(self):
-    #     storage = GcloudStorage()
-    #     content = storage.put('readme.md')
-    #     assert content == None
+    def test_put(self):
+        self.storage.put('test.json', json.dumps({'test_key': 'test_value'}))
+        pass
 
     # def test_get(self):
     #     pass

@@ -4,6 +4,7 @@ import urllib3
 from google.api_core.client_options import ClientOptions
 from google.auth.credentials import AnonymousCredentials
 from google.cloud import storage
+from google.cloud.storage.blob import Blob
 
 class GcloudStorage:
     def __init__(self):
@@ -38,9 +39,9 @@ class GcloudStorage:
         blobs = list(self.bucket.list_blobs(prefix=prefix))
         return [blob.name for blob in blobs]
 
-    # def put(self, object_name):
-    #     blob = self.bucket.blob(object_name)
-    #     blob.upload_from_filename(object_name)
+    def put(self, object_name, object_string):
+        blob = Blob(object_name, self.bucket)
+        blob.upload_from_string(object_string)
 
     # def get(self):
     #     blob = self.bucket.blob(object_name)
