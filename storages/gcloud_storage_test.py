@@ -10,9 +10,8 @@ class TestGcloudStorage(object):
         cls.storage = GcloudStorage()
 
     def setup_method(self):
-        headers = {'Content-Type': 'text/plain'}
         data = "a text content is here"
-        requests.post('http://fake-gcs-server:4443/upload/storage/v1/b/data_lake_test/o?uploadType=media&name=sample.txt', headers=headers, data=data)
+        requests.post('http://fake-gcs-server:4443/upload/storage/v1/b/data_lake_test/o?uploadType=media&name=sample.txt', data=data)
 
 
     def teardown_method(self):
@@ -29,8 +28,7 @@ class TestGcloudStorage(object):
     def test_put(self):
         text = json.dumps({'test_key': 'test_value'})
         self.storage.put('test.json', json.dumps({'test_key': 'test_value'}))
-        headers = {'Content-Type': 'text/plain'}
-        new_text = requests.get('http://fake-gcs-server:4443/storage/v1/b/data_lake_test/o/test.json?alt=media', headers=headers).text
+        new_text = requests.get('http://fake-gcs-server:4443/storage/v1/b/data_lake_test/o/test.json?alt=media').text
         assert new_text == text
 
     # def test_get(self):
