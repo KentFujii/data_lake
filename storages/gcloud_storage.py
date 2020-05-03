@@ -36,9 +36,13 @@ class GcloudStorage:
         blob = Blob(object_name, self.bucket)
         blob.upload_from_string(object_string)
 
-    # def get(self):
-    #     blob = self.bucket.blob(object_name)
-    #     return blob.download_as_string()
+    def get(self, object_name):
+        blob = self.bucket.blob(object_name)
+        return blob.download_as_string().decode('utf-8')
 
-    # def delete(self):
-    #     pass
+    def delete(self, object_name):
+        blob = self.bucket.blob(object_name)
+        blob.delete()
+        # blob = self.bucket.blob(object_name)
+        # return blob.download_as_string().decode('utf-8')
+        pass

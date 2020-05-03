@@ -31,8 +31,13 @@ class TestGcloudStorage(object):
         new_text = requests.get('http://fake-gcs-server:4443/storage/v1/b/data_lake_test/o/test.json?alt=media').text
         assert new_text == text
 
-    # def test_get(self):
-    #     pass
+    def test_get(self):
+        sample_text = self.storage.get('sample.txt')
+        assert sample_text == "a text content is here"
 
-    # def test_delete(self):
-    #     pass
+    def test_delete(self):
+        self.storage.delete('sample.txt')
+        get_req = requests.get('http://fake-gcs-server:4443/storage/v1/b/data_lake_test/o')
+        get_body = json.loads(get_req.text)
+        object_count = len(get_body['items'])
+        assert object_count == 0
