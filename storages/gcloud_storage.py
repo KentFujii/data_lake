@@ -43,6 +43,3 @@ class GcloudStorage:
     def delete(self, object_name):
         blob = self.bucket.blob(object_name)
         blob.delete()
-        # blob = self.bucket.blob(object_name)
-        # return blob.download_as_string().decode('utf-8')
-        pass
