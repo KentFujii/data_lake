@@ -1,4 +1,5 @@
 import pytest
+import requests
 from storages.gcloud_storage import GcloudStorage
 
 class TestGcloudStorage(object):
@@ -7,53 +8,43 @@ class TestGcloudStorage(object):
     # https://cloud.google.com/storage/docs/json_api/v1?hl=ja
     @classmethod
     def setup_class(cls):
-        # create bucket
-        cls.storage = GcloudStorage()
+        # initialize storage class
         print('setup_class')
 
     @classmethod
     def teardown_class(cls):
         # delete bucket
+        # curl --insecure https://fake-gcs-server:4443/storage/v1/b
+        # curl --insecure -X DELETE https://fake-gcs-server:4443/storage/v1/b/data_lake
         print('teardown_class')
 
     def setup_method(self):
         # create object
-        print(self.storage)
+        import pdb; pdb.set_trace()
+        headers = {
+            'Accept': 'application/json',
+        }
+        data = '{"auth":{"passwordCredentials":{"username":"useruser","password":"passpasspass"},"tenantId":"123456789123456789"}}'
+        response = requests.post('https://identity.tyo2.conoha.io/v2.0/tokens', headers=headers, data=data)
+        print(response.text)
         print('setup_method')
 
     def teardown_method(self):
-        # create object
+        # delete object
+        # curl --insecure https://fake-gcs-server:4443/storage/v1/b/data_lake/o
+        # curl --insecure -X DELETE https://fake-gcs-server:4443/storage/v1/b/data_lake/o/readme.md
         print('teardown_method')
 
-    def test_crud(self):
+    def test_list(self):
         storage = GcloudStorage()
         content = storage.put('readme.md')
         assert content == None
 
-    def test_purge(self):
+    def test_put(self):
         pass
 
-# @pytest.mark.parametrize('site, current_url, expected_following_url, expected_indexing_url', [
-#     (
-#         'sumirin',
-#         'https://rent.sumirin-residential.co.jp/list.php?',
-#         'https://rent.sumirin-residential.co.jp/list.php?page=1',
-#         'https://rent.sumirin-residential.co.jp/detail.php?id=680529'
-#     ),
-#     (
-#         'miyazaki',
-#         'https://www.miyazaki-chintai.com/search/unit.html?district=1',
-#         'https://www.miyazaki-chintai.com/search/miyazaki/unit.html?district=1&start=10',
-#         'https://www.miyazaki-chintai.com/search/details_a3803.html'
-#     )
-# ])
-# def test_to_links(site, current_url, expected_following_url, expected_indexing_url, mocker):
-#     rules = ConfigDatabase(site).settings['spider_rules']
-#     spider_converter = SpiderConverter(site, rules)
-#     response = mocker.Mock()
-#     response.url = current_url
-#     response.text = open(os.path.dirname(__file__) + '/testdata/' + site + '.html', 'r').read()
-#     following_urls = [link.url for link in spider_converter.to_links(response.url, response.text) if link.follow == True]
-#     indexing_urls = [link.url for link in spider_converter.to_links(response.url, response.text) if link.index == True]
-#     assert following_urls[0] == expected_following_url
-#     assert indexing_urls[0] == expected_indexing_url
+    def test_get(self):
+        pass
+
+    def test_delete(self):
+        pass

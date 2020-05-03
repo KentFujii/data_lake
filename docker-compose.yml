@@ -56,3 +56,4 @@ services:
     image: fsouza/fake-gcs-server
     ports:
       - "4443:4443"
+    entrypoint: sh -c "mkdir -p /storage/data_lake /storage/data_lake_test & /bin/fake-gcs-server -data /storage"
