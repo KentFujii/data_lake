@@ -2,3 +2,4 @@ logs
 unittests.cfg
 airflow-webserver.pid
 account.json
+scripts/twitter.sh
