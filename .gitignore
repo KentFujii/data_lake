@@ -1,4 +1,5 @@
-account.secret.json
+gcloud.secret.json
+gcloud.json
 airflow.cfg
 .env
 scripts/twitter.sh
