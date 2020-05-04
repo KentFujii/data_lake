@@ -1,5 +1,4 @@
-logs
-unittests.cfg
-airflow-webserver.pid
-account.json
+account.secret.json
+airflow.cfg
+.env
 scripts/twitter.sh
