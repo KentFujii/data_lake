@@ -16,7 +16,7 @@ class TestGcloudStorage(object):
 
     def teardown_method(self):
         get_req = requests.get('http://fake-gcs-server:4443/storage/v1/b/data_lake_test/o')
-        get_body = json.loads(get_req.text)
+        get_body = get_req.json()
         item_names = [item['name'] for item in get_body['items']]
         for item_name in item_names:
             requests.delete('http://fake-gcs-server:4443/storage/v1/b/data_lake_test/o/{item_name}'.format(item_name=item_name))
@@ -26,10 +26,10 @@ class TestGcloudStorage(object):
         assert object_count == 1
 
     def test_put(self):
-        text = json.dumps({'test_key': 'test_value'})
-        self.storage.put('test.json', json.dumps({'test_key': 'test_value'}))
-        new_text = requests.get('http://fake-gcs-server:4443/storage/v1/b/data_lake_test/o/test.json?alt=media').text
-        assert new_text == text
+        putting_json = {'test_key': 'test_value'}
+        self.storage.put('test.json', json.dumps(putting_json))
+        putted_json = requests.get('http://fake-gcs-server:4443/storage/v1/b/data_lake_test/o/test.json?alt=media').json()
+        assert putted_json == putting_json
 
     def test_get(self):
         sample_text = self.storage.get('sample.txt')
@@ -38,6 +38,6 @@ class TestGcloudStorage(object):
     def test_delete(self):
         self.storage.delete('sample.txt')
         get_req = requests.get('http://fake-gcs-server:4443/storage/v1/b/data_lake_test/o')
-        get_body = json.loads(get_req.text)
-        object_count = len(get_body['items'])
+        get_json = get_req.json()
+        object_count = len(get_json['items'])
         assert object_count == 0
