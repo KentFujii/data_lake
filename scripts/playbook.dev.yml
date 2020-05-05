@@ -1,11 +1,12 @@
 - hosts: localhost
   tasks:
-  - name: decrypt config files
+  - name: Decrypt config files
     copy:
-      src: "{{ playbook_dir }}/../configs/gcloud.secret.json"
-      dest: "{{ playbook_dir }}/../gcloud.json"
+      src: "{{ playbook_dir }}/../configs/{{ item.src }}"
+      dest: "{{ playbook_dir }}/../{{ item.dest }}"
       decrypt: yes
-      # owner: root
-      # group: root
-      # mode: 400
-      # backup: no
+    with_items:
+    - src: "airflow.dev.secret.cfg"
+      dest: "airflow.cfg"
+    - src: "dev.secret.env"
+      dest: ".env"
