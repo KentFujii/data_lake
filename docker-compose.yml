@@ -57,3 +57,10 @@ services:
     ports:
       - "4443:4443"
     entrypoint: sh -c "mkdir -p /storage/data_lake /storage/data_lake_test & /bin/fake-gcs-server -data /storage -scheme http"
+  apisprout:
+    image: danielgtaylor/apisprout
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./openapi.yaml:/openapi.yaml
+    command: /openapi.yaml --watch
