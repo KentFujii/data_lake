@@ -1,3 +1,11 @@
 - hosts: localhost
   tasks:
   - name: decrypt config files
+    copy:
+      src: "{{ playbook_dir }}/../configs/gcloud.secret.json"
+      dest: "{{ playbook_dir }}/../gcloud.json"
+      decrypt: yes
+      # owner: root
+      # group: root
+      # mode: 400
+      # backup: no

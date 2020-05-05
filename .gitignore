@@ -1,5 +1,6 @@
-gcloud.secret.json
+vault.txt
 gcloud.json
 airflow.cfg
 .env
 scripts/twitter.sh
+configs/*
