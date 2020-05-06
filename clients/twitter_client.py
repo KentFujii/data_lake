@@ -1,4 +1,5 @@
 import os
+import json
 import requests
 from requests.auth import HTTPBasicAuth
 import urllib.parse
@@ -17,8 +18,7 @@ class TwitterClient(object):
         headers = {'Authorization': "Bearer {token}".format(token=self.token)}
         query = urllib.parse.quote('西荻')
         url = self.endpoint + "/1.1/search/tweets.json?q={query}&count=100".format(query=query)
-        requests.get(url, headers=headers).json()
-        pass
+        self.data = requests.get(url, headers=headers).json()
 
     def load(self):
-        pass
+        return json.dumps(self.data)

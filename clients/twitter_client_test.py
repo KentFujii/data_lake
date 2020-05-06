@@ -8,7 +8,9 @@ class TestTwitterClient(object):
 
     def test_fetch(self):
         self.client.fetch()
-        pass
+        response = self.client.data
+        assert response['statuses'][0]['id'] == 1257966732230013000
 
     def test_load(self):
-        pass
+        self.client.data = {'test_key': 'test_value'}
+        assert self.client.load() == '{"test_key": "test_value"}'
