@@ -62,5 +62,5 @@ services:
     ports:
       - "8000:8000"
     volumes:
-      - ./openapi.yaml:/openapi.yaml
+      - ./openapi.yml:/openapi.yaml
     command: /openapi.yaml --watch

@@ -14,6 +14,8 @@ fig exec redis redis-cli
 
 ## memo
 
+https://stackoverflow.com/questions/40908214/convert-json-to-json-schema-draft-4-compatible-with-swagger-2-0
+
 https://aws.amazon.com/jp/big-data/datalakes-and-analytics/what-is-a-data-lake/
 
 https://github.com/apache/airflow/blob/master/airflow/contrib/hooks/gcs_hook.py

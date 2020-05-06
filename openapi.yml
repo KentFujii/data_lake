@@ -1,86 +1,349 @@
 openapi: 3.0.0
 info:
-  title: Sample API
-  description: Optional multiline or single-line description in [CommonMark](http://commonmark.org/help/) or HTML.
-  version: 0.1.9
+  title: Twitter API
+  description: Twitter mock api for local development
+  version: 0.0.1
 servers:
   - url: http://localhost:8000
+  - url: https://api.twitter.com
 paths:
-  /users:
+  # https://api.twitter.com/1.1/search/tweets.json?q=${Q}&count=100
+  /1.1/search/tweets.json:
     get:
-      summary: Returns a list of users.
-      description: Optional extended description in CommonMark or HTML.
       responses:
         '200':
           description: A JSON array of user names
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: object
-                  properties:
-                  id:
-                    type: integer
-                  username:
-                    type: string
-              example:
-              - id: 1
-                username: Jessica Smith
-              - id: 2
-                name: Ron Stewart
-    post:
-      summary: Creates a user.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              properties:
-                username:
-                  type: string
-            example:
-              username: Kent Fujii
-      responses:
-        '201':
-          description: Created
-  /user/{userId}:
-    get:
-      summary: Returns a user by ID.
-      parameters:
-        - name: userId
-          in: path
-          required: true
-          description: The ID of the user to return.
-          schema:
-            type: integer
-            minimum: 1
-            maximum: 2
-      responses:
-        '200':
-          description: A user object.
-          content:
-            application/json:
-              schema:
                 type: object
                 properties:
-                  id:
-                    type: integer
-                  name:
-                    type: string
-              examples:
-                Jessica:
-                  value:
-                    id: 1
-                    name: Jessica Smith
-                Ron:
-                  value:
-                    id: 2
-                    name: Ron Stewart
-        '400':
-          description: The specified user ID is invalid (not a number).
-        '404':
-          description: A user with the specified ID was not found.
-        default:
-          description: Unexpected error
+                  statuses:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        created_at:
+                          type: string
+                          example: Wed May 06 09:33:35 +0000 2020
+                        id:
+                          type: number
+                          example: 1257966732230013000
+                        id_str:
+                          type: string
+                          example: "1257966732230012928"
+                        text:
+                          type: string
+                          example: "小さなちゃぶ台を買った西荻窪のアンティーク家具屋さんが運営するYouTubeチャンネルの動画に『円山町ラプソディ』のギターインストバージョンを提供させていただきました。冒頭から使われています。キャンプ動画に円山町？… https://t.co/mevCBB69Qz"
+                        truncated:
+                          type: boolean
+                          example: true
+                        entities:
+                          type: object
+                          properties:
+                            hashtags:
+                              type: array
+                              items:
+                                type: object
+                            symbols:
+                              type: array
+                              items:
+                                type: object
+                            user_mentions:
+                              type: array
+                              items:
+                                type: object
+                            urls:
+                              type: array
+                              items:
+                                type: object
+                                properties:
+                                  url:
+                                    type: string
+                                    example: "https://t.co/mevCBB69Qz"
+                                  expanded_url:
+                                    type: string
+                                    example: "https://twitter.com/i/web/status/1257966732230012928"
+                                  display_url:
+                                    type: string
+                                    example: "twitter.com/i/web/status/1…"
+                                  indices:
+                                    type: array
+                                    items:
+                                      type: number
+                                    example:
+                                      - 109
+                                      - 132
+                        metadata:
+                          type: object
+                          properties:
+                            iso_language_code:
+                              type: string
+                              example: "ja"
+                            result_type:
+                              type: string
+                              example: "recent"
+                        source:
+                          type: string
+                          example: "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>"
+                        in_reply_to_status_id:
+                          type: object
+                          properties:
+                        in_reply_to_status_id_str:
+                          type: object
+                          properties:
+                        in_reply_to_user_id:
+                          type: object
+                          properties:
+                        in_reply_to_user_id_str:
+                          type: object
+                          properties:
+                        in_reply_to_screen_name:
+                          type: object
+                          properties:
+                        user:
+                          type: object
+                          properties:
+                            id:
+                              type: number
+                              example: 746789166717952000
+                            id_str:
+                              type: string
+                              example: "746789166717952000"
+                            name:
+                              type: string
+                              example: "吉田和史"
+                            screen_name:
+                              type: string
+                              example: "kaz_yaso"
+                            location:
+                              type: string
+                              example: "新宿"
+                            description:
+                              type: string
+                              example: ""
+                            url:
+                              type: string
+                              example: "https://t.co/en4td0ERX5"
+                            entities:
+                              type: object
+                              properties:
+                                url:
+                                  type: object
+                                  properties:
+                                    urls:
+                                      type: array
+                                      items:
+                                        type: object
+                                        properties:
+                                          url:
+                                            type: string
+                                            example: "https://t.co/en4td0ERX5"
+                                          expanded_url:
+                                            type: string
+                                            example: "https://kazknee.aremond.net/"
+                                          display_url:
+                                            type: string
+                                            example: "kazknee.aremond.net"
+                                          indices:
+                                            type: array
+                                            items:
+                                              type: number
+                                            example:
+                                              - 0
+                                              - 23
+                                description:
+                                  type: object
+                                  properties:
+                                    urls:
+                                      type: array
+                                      items:
+                                        type: object
+                            protected:
+                              type: boolean
+                              example: true
+                            followers_count:
+                              type: number
+                              example: 1216
+                            friends_count:
+                              type: number
+                              example: 863
+                            listed_count:
+                              type: number
+                              example: 7
+                            created_at:
+                              type: string
+                              example: "Sat Jun 25 19:36:27 +0000 2016"
+                            favourites_count:
+                              type: number
+                              example: 3424
+                            utc_offset:
+                              type: object
+                              properties:
+                            time_zone:
+                              type: object
+                              properties:
+                            geo_enabled:
+                              type: boolean
+                              example: false
+                            verified:
+                              type: boolean
+                              example: false
+                            statuses_count:
+                              type: number
+                              example: 5721
+                            lang:
+                              type: object
+                              properties:
+                            contributors_enabled:
+                              type: boolean
+                              example: false
+                            is_translator:
+                              type: boolean
+                              example: false
+                            is_translation_enabled:
+                              type: boolean
+                              example: false
+                            profile_background_color:
+                              type: string
+                              example: "F5F8FA"
+                            profile_background_image_url:
+                              type: object
+                              properties:
+                            profile_background_image_url_https:
+                              type: object
+                              properties:
+                            profile_background_tile:
+                              type: boolean
+                              example: false
+                            profile_image_url:
+                              type: string
+                              example: "http://pbs.twimg.com/profile_images/1221401947711795200/NMziAlBm_normal.jpg"
+                            profile_image_url_https:
+                              type: string
+                              example: "https://pbs.twimg.com/profile_images/1221401947711795200/NMziAlBm_normal.jpg"
+                            profile_banner_url:
+                              type: string
+                              example: "https://pbs.twimg.com/profile_banners/746789166717952000/1582683819"
+                            profile_link_color:
+                              type: string
+                              example: "1DA1F2"
+                            profile_sidebar_border_color:
+                              type: string
+                              example: "C0DEED"
+                            profile_sidebar_fill_color:
+                              type: string
+                              example: "DDEEF6"
+                            profile_text_color:
+                              type: string
+                              example: "333333"
+                            profile_use_background_image:
+                              type: boolean
+                              example: true
+                            has_extended_profile:
+                              type: boolean
+                              example: false
+                            default_profile:
+                              type: boolean
+                              example: true
+                            default_profile_image:
+                              type: boolean
+                              example: false
+                            following:
+                              type: object
+                              properties:
+                            follow_request_sent:
+                              type: object
+                              properties:
+                            notifications:
+                              type: object
+                              properties:
+                            translator_type:
+                              type: string
+                              example: "none"
+                        geo:
+                          type: object
+                          properties:
+                        coordinates:
+                          type: object
+                          properties:
+                        place:
+                          type: object
+                          properties:
+                        contributors:
+                          type: object
+                          properties:
+                        is_quote_status:
+                          type: boolean
+                          example: false
+                        retweet_count:
+                          type: number
+                          example: 0
+                        favorite_count:
+                          type: number
+                          example: 0
+                        favorited:
+                          type: boolean
+                          example: false
+                        retweeted:
+                          type: boolean
+                          example: false
+                        possibly_sensitive:
+                          type: boolean
+                          example: false
+                        lang:
+                          type: string
+                          example: "ja"
+                  search_metadata:
+                    type: object
+                    properties:
+                      completed_in:
+                        type: number
+                        example: 0.033
+                      max_id:
+                        type: number
+                        example: 1257966732230013000
+                      max_id_str:
+                        type: string
+                        example: "1257966732230012928"
+                      next_results:
+                        type: string
+                        example: "?max_id=1257966328838631426&q=%E8%A5%BF%E8%8D%BB&count=3&include_entities=1"
+                      query:
+                        type: string
+                        example: "%E8%A5%BF%E8%8D%BB"
+                      refresh_url:
+                        type: string
+                        example: "?since_id=1257966732230012928&q=%E8%A5%BF%E8%8D%BB&include_entities=1"
+                      count:
+                        type: number
+                        example: 3
+                      since_id:
+                        type: number
+                        example: 0
+                      since_id_str:
+                        type: string
+                        example: "0"
+  # /users:
+  #   get:
+  #     summary: Returns a list of users.
+  #     description: Optional extended description in CommonMark or HTML.
+  #     responses:
+  #       '200':
+  #         description: A JSON array of user names
+  #         content:
+  #           application/json:
+  #             schema:
+  #               type: array
+  #               items:
+  #                 type: object
+  #                 properties:
+  #                 id:
+  #                   type: integer
+  #                 username:
+  #                   type: string
+  #             example:
+  #             - id: 1
+  #               username: Jessica Smith
+  #             - id: 2
+  #               name: Ron Stewart
