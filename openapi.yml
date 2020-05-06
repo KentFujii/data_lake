@@ -1,15 +1,56 @@
-openapi: 3.0.0
+openapi: 3.0.3
 info:
   title: Twitter API
-  description: Twitter mock api for local development
-  version: 0.0.1
+  version: "1.1"
 servers:
-  - url: http://localhost:8000
   - url: https://api.twitter.com
 paths:
-  # https://api.twitter.com/1.1/search/tweets.json?q=${Q}&count=100
+  /oauth2/token:
+    post:
+      security:
+        - basicAuth: []
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              required:
+                - grant_type
+              properties:
+                grant_type:
+                  type: string
+                  example: client_credentials
+      responses:
+        '200':
+          description: A JSON object of bearer token
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token_type:
+                    type: string
+                    example: "bearer"
+                  access_token:
+                    type: string
+                    example: "your_token"
   /1.1/search/tweets.json:
     get:
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: q
+          in: query
+          required: true
+          schema:
+            type: string
+            example: "%E8%A5%BF%E8%8D%BB"
+        - name: count
+          in: query
+          schema:
+            type: integer
+            example: 100
       responses:
         '200':
           description: A JSON array of user names
@@ -88,19 +129,14 @@ paths:
                           example: "<a href=\"http://twitter.com/download/iphone\" rel=\"nofollow\">Twitter for iPhone</a>"
                         in_reply_to_status_id:
                           type: object
-                          properties:
                         in_reply_to_status_id_str:
                           type: object
-                          properties:
                         in_reply_to_user_id:
                           type: object
-                          properties:
                         in_reply_to_user_id_str:
                           type: object
-                          properties:
                         in_reply_to_screen_name:
                           type: object
-                          properties:
                         user:
                           type: object
                           properties:
@@ -179,10 +215,8 @@ paths:
                               example: 3424
                             utc_offset:
                               type: object
-                              properties:
                             time_zone:
                               type: object
-                              properties:
                             geo_enabled:
                               type: boolean
                               example: false
@@ -194,7 +228,6 @@ paths:
                               example: 5721
                             lang:
                               type: object
-                              properties:
                             contributors_enabled:
                               type: boolean
                               example: false
@@ -209,10 +242,8 @@ paths:
                               example: "F5F8FA"
                             profile_background_image_url:
                               type: object
-                              properties:
                             profile_background_image_url_https:
                               type: object
-                              properties:
                             profile_background_tile:
                               type: boolean
                               example: false
@@ -251,28 +282,21 @@ paths:
                               example: false
                             following:
                               type: object
-                              properties:
                             follow_request_sent:
                               type: object
-                              properties:
                             notifications:
                               type: object
-                              properties:
                             translator_type:
                               type: string
                               example: "none"
                         geo:
                           type: object
-                          properties:
                         coordinates:
                           type: object
-                          properties:
                         place:
                           type: object
-                          properties:
                         contributors:
                           type: object
-                          properties:
                         is_quote_status:
                           type: boolean
                           example: false
@@ -324,26 +348,11 @@ paths:
                       since_id_str:
                         type: string
                         example: "0"
-  # /users:
-  #   get:
-  #     summary: Returns a list of users.
-  #     description: Optional extended description in CommonMark or HTML.
-  #     responses:
-  #       '200':
-  #         description: A JSON array of user names
-  #         content:
-  #           application/json:
-  #             schema:
-  #               type: array
-  #               items:
-  #                 type: object
-  #                 properties:
-  #                 id:
-  #                   type: integer
-  #                 username:
-  #                   type: string
-  #             example:
-  #             - id: 1
-  #               username: Jessica Smith
-  #             - id: 2
-  #               name: Ron Stewart
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+    bearerAuth:
+      type: http
+      scheme: bearer
