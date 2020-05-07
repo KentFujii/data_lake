@@ -35,3 +35,9 @@ https://github.com/googleapis/python-storage/issues/102
 https://github.com/apache/airflow/blob/79d3f33c1b65c9c7e7b1a75e25d38cab9aa4517f/airflow/providers/google/cloud/hooks/gcs.py
 
 https://googleapis.dev/python/storage/latest/index.html
+
+### twitter api
+
+https://developer.twitter.com/en/docs/tweets/search/api-reference/get-search-tweets
+
+https://developer.twitter.com/ja/docs/basics/rate-limiting

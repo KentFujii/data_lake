@@ -2,7 +2,7 @@ import pytest
 import requests
 import urllib3
 import json
-from storages.gcloud_storage import GcloudStorage
+from gcloud_storage import GcloudStorage
 
 class TestGcloudStorage(object):
     @classmethod
