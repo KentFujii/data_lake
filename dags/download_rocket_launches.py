@@ -1,6 +1,5 @@
 import json
 import pathlib
-from datetime import datetime, timedelta
 
 import airflow.utils.dates
 import requests
@@ -11,8 +10,8 @@ from airflow.operators.python_operator import PythonOperator
 dag = DAG(
     dag_id="chapter2_download_rocket_launches",
     description="Download rocket pictures of recently launched rockets.",
-    start_date=datetime(2015, 6, 1),
-    schedule_interval=timedelta(1)
+    start_date=airflow.utils.dates.days_ago(14),
+    schedule_interval="@daily",
 )
 
 download_launches = BashOperator(
