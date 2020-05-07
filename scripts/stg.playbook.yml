@@ -6,9 +6,9 @@
       dest: "{{ playbook_dir }}/../{{ item.dest }}"
       decrypt: yes
     with_items:
-    - src: "stg.airflow.enc.cfg"
+    - src: "stg.enc.airflow.cfg"
       dest: "airflow.cfg"
-    - src: "stg.gcloud.enc.json"
+    - src: "stg.enc.gcloud.json"
       dest: "airflow.cfg"
     - src: "stg.enc.env"
       dest: ".env"
