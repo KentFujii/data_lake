@@ -6,8 +6,9 @@ from airflow import DAG
 from airflow.operators.bash_operator import BashOperator
 from airflow.operators.python_operator import PythonOperator
 
-# from data_lake import clients
-# from client.twitter_client import TwitterClient
+from data_lake import clients
+from twitter_client import TwitterClient
+from gcloud_storage import GcloudStorage
 
 dag = DAG(
     dag_id="twitter",
