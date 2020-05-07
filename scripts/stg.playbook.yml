@@ -9,6 +9,6 @@
     - src: "stg.enc.airflow.cfg"
       dest: "airflow.cfg"
     - src: "stg.enc.gcloud.json"
-      dest: "airflow.cfg"
+      dest: "gcloud.json"
     - src: "stg.enc.env"
       dest: ".env"
