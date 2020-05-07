@@ -17,15 +17,16 @@ dag = DAG(
     catchup=False
 )
 
-# download = PythonOperator(
-#     task_id="download",
-#     python_callable=_get_pictures,
-#     dag=dag,
-# )
+def _download(**context):
+    storage = GcloudStorage()
+    client = TwitterClient()
+    client.fetch()
+    storage.put(context['ts'] + '.json', client.load())
 
-download = BashOperator(
-    task_id="store",
-    bash_command="echo aaaaaaaaaaaaaaaaaaaaaaaaaa",
+download = PythonOperator(
+    task_id="download",
+    python_callable=_download,
+    provide_context=True,
     dag=dag,
 )
 
