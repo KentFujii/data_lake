@@ -1,0 +1,57 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  creationTimestamp: null
+  labels:
+    io.kompose.service: webserver
+  name: webserver
+spec:
+  containers:
+  - args:
+    - airflow
+    - webserver
+    env:
+    - name: GCS_DEFAULT_BUCKET
+      valueFrom:
+        configMapKeyRef:
+          key: GCS_DEFAULT_BUCKET
+          name: env
+    - name: GCS_EXTERNAL_URL
+      valueFrom:
+        configMapKeyRef:
+          key: GCS_EXTERNAL_URL
+          name: env
+    - name: GCS_PUBLIC_HOST
+      valueFrom:
+        configMapKeyRef:
+          key: GCS_PUBLIC_HOST
+          name: env
+    - name: TWITTER_ACCESS_KEY
+      valueFrom:
+        configMapKeyRef:
+          key: TWITTER_ACCESS_KEY
+          name: env
+    - name: TWITTER_ENDPOINT
+      valueFrom:
+        configMapKeyRef:
+          key: TWITTER_ENDPOINT
+          name: env
+    - name: TWITTER_SECRET_KEY
+      valueFrom:
+        configMapKeyRef:
+          key: TWITTER_SECRET_KEY
+          name: env
+    image: webserver
+    name: webserver
+    ports:
+    - containerPort: 8080
+    resources: {}
+    volumeMounts:
+    - mountPath: /data_lake
+      name: webserver-claim0
+  restartPolicy: OnFailure
+  volumes:
+  - name: webserver-claim0
+    persistentVolumeClaim:
+      claimName: webserver-claim0
+status: {}
