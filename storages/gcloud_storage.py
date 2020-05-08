@@ -8,9 +8,9 @@ from google.cloud.storage.blob import Blob
 
 class GcloudStorage:
     def __init__(self):
-        GCS_EXTERNAL_URL = os.getenv("GCS_EXTERNAL_URL", "http://fake-gcs-server:4443")
-        GCS_PUBLIC_HOST = os.getenv("GCS_PUBLIC_HOST", "http://storage.gcs.fake-gcs-server.nip.io:4443")
-        GCS_DEFAULT_BUCKET = os.getenv("GCS_DEFAULT_BUCKET", "data_lake_test")
+        GCS_EXTERNAL_URL = os.getenv("GCS_EXTERNAL_URL")
+        GCS_PUBLIC_HOST = os.getenv("GCS_PUBLIC_HOST")
+        GCS_DEFAULT_BUCKET = os.getenv("GCS_DEFAULT_BUCKET")
         storage.blob._API_ACCESS_ENDPOINT = GCS_PUBLIC_HOST
         storage.blob._DOWNLOAD_URL_TEMPLATE = u"%s/download/storage/v1{path}?alt=media" % GCS_EXTERNAL_URL
         storage.blob._BASE_UPLOAD_TEMPLATE = u"%s/upload/storage/v1{bucket_path}/o?uploadType=" % GCS_EXTERNAL_URL
