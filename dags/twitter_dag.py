@@ -18,10 +18,9 @@ dag = DAG(
 )
 
 def _download(**context):
-    storage = GcloudStorage()
     client = TwitterClient()
     client.fetch()
-    storage.put(context['ts'] + '.json', client.load())
+    return client.load()
 
 download = PythonOperator(
     task_id="download",
@@ -30,4 +29,16 @@ download = PythonOperator(
     dag=dag,
 )
 
-download
+def _store(**context):
+    downloaded = context['ti'].xcom_pull(task_ids='download')
+    storage = GcloudStorage()
+    storage.put(context['ts'] + '.json', downloaded)
+
+store = PythonOperator(
+    task_id="store",
+    python_callable=_store,
+    provide_context=True,
+    dag=dag,
+)
+
+download >> store
