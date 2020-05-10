@@ -3,7 +3,7 @@
   - name: Decrypt config files
     copy:
       src: "{{ playbook_dir }}/../configs/{{ item.src }}"
-      dest: "{{ playbook_dir }}/../{{ item.dest }}"
+      dest: "{{ playbook_dir }}/../../{{ item.dest }}"
       decrypt: yes
     with_items:
     - src: "stg.enc.airflow.cfg"

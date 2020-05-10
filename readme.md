@@ -41,3 +41,7 @@ https://googleapis.dev/python/storage/latest/index.html
 https://developer.twitter.com/en/docs/tweets/search/api-reference/get-search-tweets
 
 https://developer.twitter.com/ja/docs/basics/rate-limiting
+
+### k8s
+
+https://docs.ansible.com/ansible/latest/modules/k8s_module.html
