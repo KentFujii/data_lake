@@ -8,20 +8,20 @@ services:
     depends_on:
       - postgres
       - redis
-  initdb:
+  airflow_initdb:
     <<: *airflow
     command: airflow initdb
-  webserver:
+  airflow_webserver:
     <<: *airflow
     command: airflow webserver
     ports:
       - "8080:8080"
     restart: on-failure
-  scheduler:
+  airflow_scheduler:
     <<: *airflow
     command: airflow scheduler
     restart: on-failure
-  worker:
+  airflow_worker:
     <<: *airflow
     command: airflow worker
     restart: on-failure
