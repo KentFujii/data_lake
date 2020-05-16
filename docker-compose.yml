@@ -1,48 +1,29 @@
 version: "3"
 services:
-  initdb:
+  airflow: &airflow
     build: .
     env_file: .env
     volumes:
       - .:/data_lake
-    command: airflow initdb
     depends_on:
       - postgres
       - redis
+  initdb:
+    <<: *airflow
+    command: airflow initdb
   webserver:
-    build: .
-    env_file: .env
-    volumes:
-      - .:/data_lake
+    <<: *airflow
     command: airflow webserver
     ports:
       - "8080:8080"
-    depends_on:
-      - postgres
-      - redis
-      - initdb
     restart: on-failure
   scheduler:
-    build: .
-    env_file: .env
-    volumes:
-      - .:/data_lake
+    <<: *airflow
     command: airflow scheduler
-    depends_on:
-      - postgres
-      - redis
-      - initdb
     restart: on-failure
   worker:
-    build: .
-    env_file: .env
-    volumes:
-      - .:/data_lake
+    <<: *airflow
     command: airflow worker
-    depends_on:
-      - postgres
-      - redis
-      - initdb
     restart: on-failure
   postgres:
     image: postgres:11.1

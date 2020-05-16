@@ -6,12 +6,6 @@ ENV AIRFLOW_HOME /etc/airflow
 ENV PYTHONPATH /data_lake
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV C_FORCE_ROOT true
-ENV DOCKERIZE_VERSION v0.6.1
-
-RUN apt-get update && apt-get install -y wget
-RUN wget https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_VERSION/dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
-    && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
-    && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
 
 WORKDIR /data_lake
 ADD requirements.txt /data_lake/requirements.txt
@@ -19,4 +13,3 @@ RUN python3 -m pip install --upgrade pip \
         && python3 -m pip install -r /data_lake/requirements.txt
 ADD airflow.cfg /etc/airflow/airflow.cfg
 ADD . /data_lake
-ENTRYPOINT ["./entrypoint.sh"]
