@@ -6,16 +6,13 @@ cd `dirname $0`/k8s
 # https://kubernetes.io/docs/concepts/configuration/configmap/
 # https://kubernetes.io/ja/docs/concepts/
 # https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/
-# Workloads
-# Discovery & LB
-# Config & Storage
-# Cluster
-# Metadata
 
-# kubectl create configmap env --dry-run=true --output=yaml
-# kubectl apply -f ./env.yml
-# kubectl delete -f ./env.yml
+# Workloads
+# Networking
+# Storage
+# Configration
 
 # postgres
-kubectl apply -f ./postgres/deployment.yml
-kubectl delete -f ./postgres/deployment.yml
+kubectl apply -f ./postgres
+# kubectl delete -f ./postgres
+# pgcli postgres://data_lake:password@localhost:5432/data_lake
