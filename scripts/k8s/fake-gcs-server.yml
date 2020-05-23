@@ -17,7 +17,10 @@ spec:
         name: fake-gcs-server
         ports:
         - containerPort: 4443
-        # entrypoint: sh -c "mkdir -p /storage/data_lake /storage/data_lake_test & /bin/fake-gcs-server -data /storage -scheme http"
+        command:
+        - sh
+        - -c
+        - "mkdir -p /storage/data_lake /storage/data_lake_test & /bin/fake-gcs-server -data /storage -scheme http"
 ---
 apiVersion: v1
 kind: Service

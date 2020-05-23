@@ -23,4 +23,7 @@ cd `dirname $0`/k8s
 
 # fake-gcs-server
 # kubectl apply -f ./fake-gcs-server.yml
-kubectl delete -f ./fake-gcs-server.yml
+# kubectl delete -f ./fake-gcs-server.yml
+
+# apisprout
+kubectl apply -f ./apisprout.yml
