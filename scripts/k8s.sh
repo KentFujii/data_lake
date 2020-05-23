@@ -22,4 +22,5 @@ cd `dirname $0`/k8s
 # kubectl delete -f ./redis.yml
 
 # fake-gcs-server
-# use configmap
+# kubectl apply -f ./fake-gcs-server.yml
+kubectl delete -f ./fake-gcs-server.yml

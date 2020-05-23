@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fake-gcs-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: fake-gcs-server
+  template:
+    metadata:
+      labels:
+        app: fake-gcs-server
+    spec:
+      containers:
+      - image: fsouza/fake-gcs-server
+        name: fake-gcs-server
+        ports:
+        - containerPort: 4443
+        # entrypoint: sh -c "mkdir -p /storage/data_lake /storage/data_lake_test & /bin/fake-gcs-server -data /storage -scheme http"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fake-gcs-server
+spec:
+  ports:
+  - port: 4443
+    targetPort: 4443
+  selector:
+    app: fake-gcs-server
