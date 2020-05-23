@@ -1,11 +1,37 @@
 kind: ConfigMap
 apiVersion: v1
 metadata:
-  name: fake-gcs-server
+  name: apisprout
 data:
-  test.conf: |
+  openapi.yml: |
     env = plex-test
     endpoint = 0.0.0.0:31001
     char = utf8
     vault = PLEX/test
     log-size = 512M
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: apisprout
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: apisprout
+  template:
+    metadata:
+      labels:
+        app: apisprout
+    spec:
+      containers:
+      - image: danielgtaylor/apisprout
+        name: apisprout
+        ports:
+        - containerPort: 8000
+  # volumes:
+  #   # ConfigMapのvolume定義
+  #   - name: config-volume
+  #     configMap:
+  #       # 作ったConfigMapのname
+  #       name: example-config
