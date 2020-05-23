@@ -18,4 +18,5 @@ cd `dirname $0`/k8s
 # pgcli postgres://data_lake:password@localhost:5432/data_lake
 
 # redis
-# kubectl apply -f ./redis.yml
+kubectl apply -f ./redis.yml
+# kubectl delete -f ./redis.yml
