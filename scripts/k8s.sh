@@ -26,4 +26,5 @@ cd `dirname $0`/k8s
 # kubectl delete -f ./fake-gcs-server.yml
 
 # apisprout
-kubectl apply -f ./apisprout.yml
+kubectl create cm apisprout --from-file=../../openapi.yml --dry-run -o yaml | kubectl apply -f -
+# kubectl apply -f ./apisprout.yml

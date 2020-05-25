@@ -1,15 +1,3 @@
-kind: ConfigMap
-apiVersion: v1
-metadata:
-  name: apisprout
-data:
-  openapi.yml: |
-    env = plex-test
-    endpoint = 0.0.0.0:31001
-    char = utf8
-    vault = PLEX/test
-    log-size = 512M
----
 apiVersion: apps/v1
 kind: Deployment
 metadata:
