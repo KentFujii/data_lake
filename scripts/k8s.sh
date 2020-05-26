@@ -27,4 +27,4 @@ cd `dirname $0`/k8s
 
 # apisprout
 kubectl create cm apisprout --from-file=../../openapi.yml --dry-run -o yaml | kubectl apply -f -
-# kubectl apply -f ./apisprout.yml
+kubectl apply -f ./apisprout.yml

@@ -15,11 +15,18 @@ spec:
       containers:
       - image: danielgtaylor/apisprout
         name: apisprout
+        volumeMounts:
+        - name: config-volume
+          mountPath: /etc/config
         ports:
         - containerPort: 8000
-  # volumes:
-  #   # ConfigMapのvolume定義
-  #   - name: config-volume
-  #     configMap:
-  #       # 作ったConfigMapのname
-  #       name: example-config
+        command:
+        - apisprout
+        - /etc/config/openapi.yml
+      volumes:
+      - name: config-volume
+        configMap:
+          name: apisprout
+          items:
+          - key: openapi.yml
+            path: openapi.yml
