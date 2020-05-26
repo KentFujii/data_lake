@@ -30,3 +30,14 @@ spec:
           items:
           - key: openapi.yml
             path: openapi.yml
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: apisprout
+spec:
+  ports:
+  - port: 8000
+    targetPort: 8000
+  selector:
+    app: apisprout
