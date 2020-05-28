@@ -6,6 +6,7 @@ cd `dirname $0`/k8s
 # https://kubernetes.io/docs/concepts/configuration/configmap/
 # https://kubernetes.io/ja/docs/concepts/
 # https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/
+# kubectl delete all --all
 
 # Workloads
 # Networking
