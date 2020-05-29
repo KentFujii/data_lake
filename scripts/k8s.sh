@@ -7,6 +7,7 @@ cd `dirname $0`/k8s
 # https://kubernetes.io/ja/docs/concepts/
 # https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.13/
 # kubectl delete all --all
+# kubectl delete all --all -n data-lake
 
 # Workloads
 # Networking
