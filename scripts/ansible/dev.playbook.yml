@@ -21,7 +21,7 @@
   #   k8s:
   #     state: present
   #     src: "{{ playbook_dir }}/../k8s/fake-gcs-server.yml"
-  - name: Create the apisprout resources
-    k8s:
-      state: present
-      src: "{{ playbook_dir }}/../k8s/apisprout.yml"
+  # - name: Create the apisprout resources
+  #   k8s:
+  #     state: present
+  #     src: "{{ playbook_dir }}/../k8s/apisprout.yml"
