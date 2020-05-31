@@ -2,14 +2,20 @@
   tasks:
   # https://docs.ansible.com/ansible/latest/modules/k8s_module.html
   # kubectl create cm apisprout --from-file=../../openapi.yml --dry-run -o yaml | kubectl apply -f -
-  - name: Create the postgres resources
+  - name: Read definition file from the Ansible controller file system after Jinja templating
     k8s:
       state: present
-      src: "{{ playbook_dir }}/../k8s/postgres.yml"
-  - name: Create the redis resources
-    k8s:
-      state: present
-      src: "{{ playbook_dir }}/../k8s/redis.yml"
+      definition: "{{ lookup('template', playbook_dir + '/../k8s/config.j2.yml') }}"
+    vars:
+      openapi: "{{ lookup('file', playbook_dir + '/../../openapi.yml') }}"
+  # - name: Create the postgres resources
+  #   k8s:
+  #     state: present
+  #     src: "{{ playbook_dir }}/../k8s/postgres.yml"
+  # - name: Create the redis resources
+  #   k8s:
+  #     state: present
+  #     src: "{{ playbook_dir }}/../k8s/redis.yml"
   # - name: Create the fake-gcs-server resources
   #   k8s:
   #     state: present
