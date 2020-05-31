@@ -11,3 +11,5 @@ metadata:
 data:
   openapi.yml: |
     {{ openapi|indent(4, False) }}
+  airflow.cfg: |
+    {{ airflow|indent(4, False) }}
