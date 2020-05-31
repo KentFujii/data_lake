@@ -10,6 +10,6 @@ metadata:
   namespace: data-lake
 data:
   openapi.yml: |
-    {{ openapi|indent(4, False) }}
+    {{ openapi | indent(width=4, indentfirst=False) }}
   airflow.cfg: |
-    {{ airflow|indent(4, False) }}
+    {{ airflow | indent(width=4, indentfirst=False) }}
