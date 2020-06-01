@@ -1,4 +1,5 @@
 - hosts: localhost
+  debugger: on_failed
   tasks:
   # https://docs.ansible.com/ansible/latest/modules/k8s_module.html
   # kubectl create cm apisprout --from-file=../../openapi.yml --dry-run -o yaml | kubectl apply -f -
@@ -16,12 +17,12 @@
   - name: Create the data-lake middlewares workloads
     k8s:
       state: present
-      src: "{{ item }}"
+      src: "{{ playbook_dir }}/../k8s/{{ item }}.yml"
     with_items:
-    - "{{ playbook_dir }}/../k8s/postgres.yml"
-    - "{{ playbook_dir }}/../k8s/redis.yml"
-    - "{{ playbook_dir }}/../k8s/fake-gcs-server.yml"
-    - "{{ playbook_dir }}/../k8s/apisprout.yml"
+    - postgres
+    - redis
+    - fake-gcs-server
+    - apisprout
   - name: Create the data-lake initdb workloads
     k8s:
       state: present
