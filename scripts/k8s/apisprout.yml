@@ -1,7 +1,8 @@
-apiVersion: apps/v1
+apiVersion: v1
 kind: Deployment
 metadata:
-  name: apisprout
+  name: apisprout-deploy
+  namespace: data-lake-ns
 spec:
   replicas: 1
   selector:
@@ -26,7 +27,7 @@ spec:
       volumes:
       - name: config-volume
         configMap:
-          name: apisprout
+          name: data-lake-cm
           items:
           - key: openapi.yml
             path: openapi.yml
@@ -34,7 +35,8 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: apisprout
+  name: apisprout-svc
+  namespace: data-lake-ns
 spec:
   ports:
   - port: 8000

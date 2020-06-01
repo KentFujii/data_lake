@@ -1,13 +1,8 @@
 apiVersion: v1
-kind: Namespace
-metadata:
-  name: data-lake
----
-apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: apisprout
-  namespace: data-lake
+  name: data-lake-cm
+  namespace: data-lake-ns
 data:
   openapi.yml: |
     {{ openapi | indent(width=4, indentfirst=False) }}
