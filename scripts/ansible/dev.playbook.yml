@@ -13,19 +13,12 @@
     vars:
       openapi: "{{ lookup('file', playbook_dir + '/../../openapi.yml') }}"
       airflow: "{{ lookup('file', playbook_dir + '/../../airflow.cfg') }}"
-  # - name: Create the postgres resources
-  #   k8s:
-  #     state: present
-  #     src: "{{ playbook_dir }}/../k8s/postgres.yml"
-  # - name: Create the redis resources
-  #   k8s:
-  #     state: present
-  #     src: "{{ playbook_dir }}/../k8s/redis.yml"
-  # - name: Create the fake-gcs-server resources
-  #   k8s:
-  #     state: present
-  #     src: "{{ playbook_dir }}/../k8s/fake-gcs-server.yml"
-  - name: Create the apisprout resources
+  - name: Create the data-lake middlewares
     k8s:
       state: present
-      src: "{{ playbook_dir }}/../k8s/apisprout.yml"
+      src: "{{ item }}"
+    with_items:
+    - "{{ playbook_dir }}/../k8s/postgres.yml"
+    - "{{ playbook_dir }}/../k8s/redis.yml"
+    - "{{ playbook_dir }}/../k8s/fake-gcs-server.yml"
+    - "{{ playbook_dir }}/../k8s/apisprout.yml"
