@@ -13,7 +13,7 @@
     vars:
       openapi: "{{ lookup('file', playbook_dir + '/../../openapi.yml') }}"
       airflow: "{{ lookup('file', playbook_dir + '/../../airflow.cfg') }}"
-  - name: Create the data-lake middlewares
+  - name: Create the data-lake middlewares workloads
     k8s:
       state: present
       src: "{{ item }}"
@@ -22,3 +22,7 @@
     - "{{ playbook_dir }}/../k8s/redis.yml"
     - "{{ playbook_dir }}/../k8s/fake-gcs-server.yml"
     - "{{ playbook_dir }}/../k8s/apisprout.yml"
+  - name: Create the data-lake initdb workloads
+    k8s:
+      state: present
+      src: "{{ playbook_dir }}/../k8s/initdb.yml"
