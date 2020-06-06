@@ -8,3 +8,5 @@ data:
     {{ openapi | indent(width=4, indentfirst=False) }}
   airflow.cfg: |
     {{ airflow | indent(width=4, indentfirst=False) }}
+  unittests.cfg: |
+    {{ unittests | indent(width=4, indentfirst=False) }}

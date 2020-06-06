@@ -1,8 +1,7 @@
 - hosts: localhost
   debugger: on_failed
   tasks:
-  # https://docs.ansible.com/ansible/latest/modules/k8s_module.html
-  # kubectl create cm apisprout --from-file=../../openapi.yml --dry-run -o yaml | kubectl apply -f -
+  # https://docs.ansible.com/ansible/latest/modules/list_of_clustering_modules.html#k8s
   - name: Create the data-lake namespace
     k8s:
       state: present
@@ -14,6 +13,7 @@
     vars:
       openapi: "{{ lookup('file', playbook_dir + '/../../openapi.yml') }}"
       airflow: "{{ lookup('file', playbook_dir + '/../../airflow.cfg') }}"
+      unittests: "{{ lookup('file', playbook_dir + '/../../unittests.cfg') }}"
   - name: Create the data-lake middlewares workloads
     k8s:
       state: present
@@ -27,3 +27,5 @@
     k8s:
       state: present
       src: "{{ playbook_dir }}/../k8s/initdb.yml"
+  # https://stackoverflow.com/questions/57433963/ansible-kubernetes-how-to-wait-for-a-job-completion
+  # https://docs.ansible.com/ansible/latest/modules/k8s_info_module.html#k8s-info-module
