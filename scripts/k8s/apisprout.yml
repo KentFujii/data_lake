@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: Deployment
 metadata:
-  name: apisprout-deploy
-  namespace: data-lake-ns
+  name: apisprout
+  namespace: data-lake
 spec:
   replicas: 1
   selector:
@@ -35,8 +35,8 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: apisprout-svc
-  namespace: data-lake-ns
+  name: apisprout
+  namespace: data-lake
 spec:
   ports:
   - port: 8000

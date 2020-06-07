@@ -1,8 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: redis-deploy
-  namespace: data-lake-ns
+  name: redis
+  namespace: data-lake
 spec:
   replicas: 1
   selector:
@@ -22,8 +22,8 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: redis-svc
-  namespace: data-lake-ns
+  name: redis
+  namespace: data-lake
 spec:
   ports:
   - port: 6379

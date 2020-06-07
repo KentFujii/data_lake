@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: Deployment
 metadata:
-  name: fake-gcs-server-deploy
-  namespace: data-lake-ns
+  name: fake-gcs-server
+  namespace: data-lake
 spec:
   replicas: 1
   selector:
@@ -26,8 +26,8 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: fake-gcs-server-svc
-  namespace: data-lake-ns
+  name: fake-gcs-server
+  namespace: data-lake
 spec:
   ports:
   - port: 4443
