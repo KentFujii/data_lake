@@ -37,5 +37,6 @@
     delay: 5
     retries: 10
   # - name: Delete the data-lake initdb workloads
+  # - name: Create the data-lake webserver/scheduler/worker workloads
   # https://stackoverflow.com/questions/57433963/ansible-kubernetes-how-to-wait-for-a-job-completion
   # https://docs.ansible.com/ansible/latest/modules/k8s_info_module.html#k8s-info-module
