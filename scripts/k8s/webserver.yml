@@ -14,7 +14,7 @@ spec:
         app: webserver
     spec:
       containers:
-      - image: data_lake_airflow_webserver
+      - image: data_lake_airflow
         imagePullPolicy: Never
         name: webserver
         env:
