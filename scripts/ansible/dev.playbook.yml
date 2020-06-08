@@ -20,9 +20,9 @@
       src: "{{ playbook_dir }}/../k8s/{{ item }}.yml"
     with_items:
     - postgres
-    # - redis
-    # - fake-gcs-server
-    # - apisprout
+    - redis
+    - fake-gcs-server
+    - apisprout
   - name: Create the data-lake initdb workloads
     k8s:
       state: present
@@ -31,12 +31,24 @@
     k8s_info:
       name: initdb
       kind: Job
-      namespace: data-lake-ns
+      namespace: data-lake
     register: job_status
     until: job_status['resources'][0]['status'].get('succeeded') != None
     delay: 5
     retries: 10
-  # - name: Delete the data-lake initdb workloads
-  # - name: Create the data-lake webserver/scheduler/worker workloads
+  - name: Delete the data-lake initdb workloads
+    k8s:
+      state: absent
+      kind: Job
+      namespace: data-lake
+      name: initdb
+  - name: Create the data-lake applications workloads
+    k8s:
+      state: present
+      src: "{{ playbook_dir }}/../k8s/{{ item }}.yml"
+    with_items:
+    - webserver
+    - scheduler
+    - worker
   # https://stackoverflow.com/questions/57433963/ansible-kubernetes-how-to-wait-for-a-job-completion
   # https://docs.ansible.com/ansible/latest/modules/k8s_info_module.html#k8s-info-module

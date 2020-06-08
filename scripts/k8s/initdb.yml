@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   name: initdb
-  namespace: data-lake-ns
+  namespace: data-lake
 spec:
   completions: 1
   parallelism: 1
