@@ -20,33 +20,33 @@ spec:
         - name: GCS_DEFAULT_BUCKET
           valueFrom:
             configMapKeyRef:
-              name:
-              key:
+              name: data-lake
+              key: gcs_default_bucket
         - name: GCS_EXTERNAL_URL
           valueFrom:
             configMapKeyRef:
-              name:
-              key:
+              name: data-lake
+              key: gcs_external_url
         - name: GCS_PUBLIC_HOST
           valueFrom:
             configMapKeyRef:
-              name:
-              key:
+              name: data-lake
+              key: gcs_public_host
         - name: TWITTER_ENDPOINT
           valueFrom:
             configMapKeyRef:
-              name:
-              key:
+              name: data-lake
+              key: twitter_endpoint
         - name: TWITTER_ACCESS_KEY
           valueFrom:
             configMapKeyRef:
-              name:
-              key:
+              name: data-lake
+              key: twitter_access_key
         - name: TWITTER_SECRET_KEY
           valueFrom:
             configMapKeyRef:
-              name:
-              key:
+              name: data-lake
+              key: twitter_secret_key
         command:
         - airflow
         - webserver
