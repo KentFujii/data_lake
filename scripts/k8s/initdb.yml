@@ -22,7 +22,7 @@ spec:
       volumes:
       - name: config-volume
         configMap:
-          name: data-lake-cm
+          name: data-lake
           items:
           - key: airflow.cfg
             path: airflow.cfg

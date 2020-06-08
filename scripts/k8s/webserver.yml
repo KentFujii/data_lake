@@ -15,6 +15,7 @@ spec:
     spec:
       containers:
       - image: data_lake_airflow_webserver
+        imagePullPolicy: Never
         name: webserver
         env:
         - name: GCS_DEFAULT_BUCKET
