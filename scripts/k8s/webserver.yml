@@ -60,8 +60,10 @@ metadata:
   name: webserver
   namespace: data-lake
 spec:
+  type: NodePort
   ports:
   - port: 8080
     targetPort: 8080
+    nodePort: 30080
   selector:
     app: webserver
