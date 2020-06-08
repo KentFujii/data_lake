@@ -1,8 +1,8 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: data-lake-cm
-  namespace: data-lake-ns
+  name: data-lake
+  namespace: data-lake
 data:
   openapi.yml: |
     {{ openapi | indent(width=4, indentfirst=False) }}
